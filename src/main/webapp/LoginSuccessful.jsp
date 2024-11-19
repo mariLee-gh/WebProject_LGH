@@ -39,9 +39,11 @@
 											<p>A free and fully responsive site template</p>
 										</header>
 										<p>Aenean ornare velit lacus, ac varius enim ullamcorper eu. Proin aliquam facilisis ante interdum congue. Integer mollis, nisl amet convallis, porttitor magna ullamcorper, amet egestas mauris. Ut magna finibus nisi nec lacinia. Nam maximus erat id euismod egestas. Pellentesque sapien ac quam. Lorem ipsum dolor sit nullam.</p>
-										<ul class="actions">
-											<li><a href="home.jsp" class="button big">로그아웃</a></li>
-										</ul>
+										<form action="logout.do" method="post">
+										    <ul class="actions">
+										        <li><button type="submit" class="button big">로그아웃</button></li>
+										    </ul>
+										</form>
 										
 									</div>
 									<span class="image object">
