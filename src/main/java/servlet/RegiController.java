@@ -34,7 +34,7 @@ public class RegiController extends HttpServlet {
             password == null || password.trim().isEmpty() ||
             email == null || email.trim().isEmpty()) {  	
             req.setAttribute("error", "모든 정보를 기입해 주세요.");
-            req.getRequestDispatcher("/regiForm.do").forward(req, resp);
+            req.getRequestDispatcher("/regiForm.jsp").forward(req, resp);
             return;
             
             
@@ -69,7 +69,7 @@ public class RegiController extends HttpServlet {
         // 회원가입 처리
         int result = dao.regiUser(newUser);
         if (result > 0) {
-            resp.sendRedirect("login.jsp"); // 회원가입 성공 후 로그인 페이지로 리디렉션
+            resp.sendRedirect("LoginForm.jsp"); // 회원가입 성공 후 로그인 페이지로 리디렉션
         } else {
             req.setAttribute("registerError", "회원가입 실패. 잠시 후 다시 시도해 주세요.");
             req.getRequestDispatcher("regiForm.jsp").forward(req, resp);

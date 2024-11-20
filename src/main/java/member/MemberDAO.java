@@ -49,7 +49,7 @@ public class MemberDAO extends DBConnPool {
 	   
 	   try {
 		   String query = 
-				   "INSERT INTO users (lastname, first_name, username, password, email) VALUES (?,?,?,?,?)";
+				   "INSERT INTO users (last_name, first_name, username, password, email) VALUES (?,?,?,?,?)";
 	   
 		   psmt = con.prepareStatement(query);
 		   psmt.setString(1, dto.getLast_Name());
