@@ -34,17 +34,44 @@
 									</ul>
 								</header>
 								
-								<h3>회원가입 Form</h3>
-
-													<form method="post" action="#">
+								<h3>회원가입을 진행해주세요.</h3>
+								
+								<c:if test="${not empty error}">
+								    <div style="color: red; font-weight: bold;">
+								        ${error} <!-- 일반적인 에러 메시지 출력 -->
+								    </div>
+								</c:if>
+								
+								<!-- 아이디 중복 에러 메시지 출력 -->
+								<c:if test="${not empty usernameError}">
+								    <div style="color: red; font-weight: bold;">
+								        ${usernameError} <!-- 아이디 중복 에러 메시지 출력 -->
+								    </div>
+								</c:if>
+								
+								<!-- 이메일 중복 에러 메시지 출력 -->
+								<c:if test="${not empty emailError}">
+								    <div style="color: red; font-weight: bold;">
+								        ${emailError} <!-- 이메일 중복 에러 메시지 출력 -->
+								    </div>
+								</c:if>
+								
+								<!-- 회원가입 실패 에러 메시지 출력 -->
+								<c:if test="${not empty registerError}">
+								    <div style="color: red; font-weight: bold;">
+								        ${registerError} <!-- 회원가입 실패 에러 메시지 출력 -->
+								    </div>
+								</c:if>
+									    
+													<form method="post" action="regiForm.do" >
 														<div class="row gtr-uniform">
 															<div class="col-6 col-12-xsmall">
 														            <label for="first-name">First Name(이름)</label>
-														            <input type="text" name="first-name" id="first-name" value="" placeholder="First Name(이름)" />
+														            <input type="text" name="firstname" id="first-name" value="" placeholder="First Name(이름)" />
 														     </div>
 														      <div class="col-6 col-12-xsmall">
 														            <label for="last-name">Last Name(성)</label>
-														            <input type="text" name="last-name" id="last-name" value="" placeholder="Last Name(성)" />
+														            <input type="text" name="lastname" id="last-name" value="" placeholder="Last Name(성)" />
 														       </div>
 														        <div class="col-6 col-12-xsmall">
 														            <label for="username">Username(아이디)</label>

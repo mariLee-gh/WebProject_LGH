@@ -14,6 +14,7 @@ public class MemberDTO {
     private Timestamp regidate;
     private Timestamp updated_at;
     
+
     
 	public int getUser_id() {
 		return user_id;
