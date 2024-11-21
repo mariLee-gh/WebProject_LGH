@@ -24,7 +24,7 @@
 
 							<!-- Header -->
 								<header id="header">
-									<a href="home.jsp" class="logo"><strong>Editorial</strong> by HTML5 UP</a>
+									<a href="index.jsp" class="logo"><strong>Editorial</strong> by HTML5 UP</a>
 									<ul class="icons">
 										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
 										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
@@ -33,77 +33,60 @@
 										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
 									</ul>
 								</header>
-								
-								<h3>회원가입을 진행해주세요.</h3>
-								
-								<c:if test="${not empty error}">
-								    <div style="color: red; font-weight: bold;">
-								        ${error} <!-- 일반적인 에러 메시지 출력 -->
-								    </div>
-								</c:if>
-								
-								<!-- 아이디 중복 에러 메시지 출력 -->
-								<c:if test="${not empty usernameError}">
-								    <div style="color: red; font-weight: bold;">
-								        ${usernameError} <!-- 아이디 중복 에러 메시지 출력 -->
-								    </div>
-								</c:if>
-								
-								<!-- 이메일 중복 에러 메시지 출력 -->
-								<c:if test="${not empty emailError}">
-								    <div style="color: red; font-weight: bold;">
-								        ${emailError} <!-- 이메일 중복 에러 메시지 출력 -->
-								    </div>
-								</c:if>
-								
-								<!-- 회원가입 실패 에러 메시지 출력 -->
-								<c:if test="${not empty registerError}">
-								    <div style="color: red; font-weight: bold;">
-								        ${registerError} <!-- 회원가입 실패 에러 메시지 출력 -->
-								    </div>
-								</c:if>
-									    
-													<form method="post" action="regiForm.do" >
+
+							<!-- Content -->
+								<section>
+									<!-- Elements -->
+										<h2 id="elements">Elements</h2>
+										<div class="row gtr-200">
+											<div class="col-6 col-12-medium">
+
+												<!-- Form -->
+													<h3>Form</h3>
+
+													<form method="post" action="#">
 														<div class="row gtr-uniform">
 															<div class="col-6 col-12-xsmall">
-														            <label for="first-name">First Name(이름)</label>
-														            <input type="text" name="firstname" id="first-name" value="" placeholder="First Name(이름)" />
-														     </div>
-														      <div class="col-6 col-12-xsmall">
-														            <label for="last-name">Last Name(성)</label>
-														            <input type="text" name="lastname" id="last-name" value="" placeholder="Last Name(성)" />
-														       </div>
-														        <div class="col-6 col-12-xsmall">
-														            <label for="username">Username(아이디)</label>
-														            <input type="text" name="username" id="username" value="" placeholder="Username(아이디)" />
-														        </div>
-														        <div class="col-6 col-12-xsmall">
-														            <label for="password">Password(비밀번호)</label>
-														            <input type="password" name="password" id="password" value="" placeholder="Password(비밀번호)" />
-														        </div>
-														        <div class="col-6 col-12-xsmall">
-														            <label for="email">Email(이메일)</label>
-														            <input type="email" name="email" id="email" value="" placeholder="email(이메일)" />
-														        </div>
-														
+																<input type="text" name="title" id="title" value="" placeholder="제목을 적어주세요." />
+															</div>
+															<div class="col-6 col-12-xsmall">
+																<input type="file" name="ofile" id="ofile" value="" placeholder="Email" />
+															</div>
+															<!-- Break -->
+															<div class="col-12">
+																<textarea name="demo-message" id="demo-message" placeholder="내용을 적어주세요." rows="6"></textarea>
+															</div>
 															<!-- Break -->
 															<div class="col-12">
 																<ul class="actions">
-																	<li><input type="submit" value="Send" class="primary" /></li>
+																	<li><input type="submit" value="submit" class="primary" /></li>
+																	<li><input type="submit" value="목록으로 가기" class="primary" /></li>
 																	<li><input type="reset" value="Reset" /></li>
 																</ul>
 															</div>
 														</div>
 													</form>
-												</div>
+
+
 											</div>
-								
-<!-- Sidebar -->
+											<div class="col-6 col-12-medium">
+
+												
+
+											</div>
+										</div>
+
+								</section>
+
+						</div>
+					</div>
+
+				<!-- Sidebar -->
 					<div id="sidebar">
 						<div class="inner">
 
 							<!-- Search -->
-								<section id="search" class="alt" >
+								<section id="search" class="alt">
 									<form method="post" action="#">
 										<input type="text" name="query" id="query" placeholder="Search" />
 									</form>
@@ -115,7 +98,7 @@
 										<h2>Menu</h2>
 									</header>
 									<ul>
-										<li><a href="Main.jsp">Homepage</a></li>
+										<li><a href="index.jsp">Homepage</a></li>
 										<li><a href="generic.jsp">Generic</a></li>
 										<li><a href="elements.jsp">Elements</a></li>
 										<li>
@@ -143,6 +126,7 @@
 										<li><a href="#">Amet Lacinia</a></li>
 									</ul>
 								</nav>
+
 
 							<!-- Footer -->
 								<footer id="footer">

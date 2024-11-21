@@ -24,7 +24,7 @@
 
 							<!-- Header -->
 								<header id="header">
-									<a href="home.jsp" class="logo"><strong>Editorial</strong> by HTML5 UP</a>
+									<a href="index.jsp" class="logo"><strong>Editorial</strong> by HTML5 UP</a>
 									<ul class="icons">
 										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
 										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
@@ -33,71 +33,86 @@
 										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
 									</ul>
 								</header>
-								<span style="color:red;">
-           <%= request.getAttribute("LoginErrMsg")==null? "" : request.getAttribute("LoginErrMsg") %>
-          </span>
 
 							<!-- Content -->
 								<section>
-									<header class="main">
-										<h1>Elements</h1>
-									</header>
+									<!-- Elements -->
+										<h2 id="elements">Elements</h2>
+										<div class="row gtr-200">
+											<div class="col-6 col-12-medium">
 
-									<!-- Content -->
-										<h2 id="content">Sample Content</h2>
-								            <form name="loginForm" method="post" action="login.do" onsubmit="return validateForm(this);">
-							                <div class="row gtr-uniform">
-							                    <div class="col-6 col-12-xsmall">
-							                        <label for="username">Username(아이디)</label>
-							                        <input type="text" name="username" id="username" placeholder="Username(아이디)" />
-							                    </div>
-							                    <div class="col-6 col-12-xsmall">
-							                        <label for="password">Password(비밀번호)</label>
-							                        <input type="password" name="password" id="password" placeholder="Password(비밀번호)" />
-							                    </div>
-							
-							                    <!-- Break -->
-							                    <div class="col-12">
-							                        <ul class="actions">
-							                            <li><input type="submit" value="로그인" class="primary" /></li>
-							                            <li><input type="reset" value="Reset" /></li>
-							                        </ul>
-							                    </div>
-							                </div>
-							            </form>
+												<!-- Form -->
+													<h3>Form</h3>
 
-									<hr class="major" />
+													<form method="post" action="#">
+														<div class="row gtr-uniform">
+															<div class="col-6 col-12-xsmall">
+																<input type="text" name="demo-name" id="demo-name" value="" placeholder="Name" />
+															</div>
+															<div class="col-6 col-12-xsmall">
+																<input type="email" name="demo-email" id="demo-email" value="" placeholder="Email" />
+															</div>
+															<!-- Break -->
+															<div class="col-12">
+																<select name="demo-category" id="demo-category">
+																	<option value="">- Category -</option>
+																	<option value="1">Manufacturing</option>
+																	<option value="1">Shipping</option>
+																	<option value="1">Administration</option>
+																	<option value="1">Human Resources</option>
+																</select>
+															</div>
+															<!-- Break -->
+															<div class="col-4 col-12-small">
+																<input type="radio" id="demo-priority-low" name="demo-priority" checked>
+																<label for="demo-priority-low">Low</label>
+															</div>
+															<div class="col-4 col-12-small">
+																<input type="radio" id="demo-priority-normal" name="demo-priority">
+																<label for="demo-priority-normal">Normal</label>
+															</div>
+															<div class="col-4 col-12-small">
+																<input type="radio" id="demo-priority-high" name="demo-priority">
+																<label for="demo-priority-high">High</label>
+															</div>
+															<!-- Break -->
+															<div class="col-6 col-12-small">
+																<input type="checkbox" id="demo-copy" name="demo-copy">
+																<label for="demo-copy">Email me a copy</label>
+															</div>
+															<div class="col-6 col-12-small">
+																<input type="checkbox" id="demo-human" name="demo-human" checked>
+																<label for="demo-human">I am a human</label>
+															</div>
+															<!-- Break -->
+															<div class="col-12">
+																<textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
+															</div>
+															<!-- Break -->
+															<div class="col-12">
+																<ul class="actions">
+																	<li><input type="submit" value="submit" class="primary" /></li>
+																	<li><input type="reset" value="Reset" /></li>
+																</ul>
+															</div>
+														</div>
+													</form>
 
-											
+
+											</div>
+											<div class="col-6 col-12-medium">
+
+												
+
+											</div>
 										</div>
 
 								</section>
 
 						</div>
-						
-						
-						<script>
-    function validateForm(form) {
-        // 아이디 확인
-        if (form.username.value.trim() === "") {
-            alert("아이디를 입력하세요.");
-            form.username.focus();
-            return false;
-        }
+					</div>
 
-        // 비밀번호 확인
-        if (form.password.value.trim() === "") {
-            alert("비밀번호를 입력하세요.");
-            form.password.focus();
-            return false;
-        }
-
-        return true;
-    }
-</script>
-						
-						
-										<!-- Sidebar -->
+				<!-- Sidebar -->
 					<div id="sidebar">
 						<div class="inner">
 
@@ -143,6 +158,7 @@
 									</ul>
 								</nav>
 
+
 							<!-- Footer -->
 								<footer id="footer">
 									<p class="copyright">&copy; Untitled. All rights reserved. Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
@@ -150,9 +166,6 @@
 
 						</div>
 					</div>
-					</div>
-
-
 
 			</div>
 

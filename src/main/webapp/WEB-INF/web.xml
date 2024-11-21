@@ -29,4 +29,25 @@
  	<param-name>OraclePwd</param-name>
  	<param-value>1234</param-value>
   </context-param>
+  
+  <!-- 한페이지 당 출력할 게시물의 갯수   -->
+  <context-param>
+  	<param-name>POST_PER_PAGE</param-name>
+  	<param-value>10</param-value>
+  </context-param>
+  <!-- 한 블럭당 출력할 페이지번호 갯수 -->
+  <context-param>
+ 	<param-name>POST_PER_BLOCK</param-name>
+  	<param-value>5</param-value>
+  </context-param>
+	
+  <!-- 모델2방식의 게시판 목록 매핑 - 페이징 기능 추가  -->
+  <servlet>
+  	<servlet-name>MVCBoardListPage</servlet-name>
+  	<servlet-class>servlet.FreeListController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>MVCBoardListPage</servlet-name>
+  	<url-pattern>/freeList.do</url-pattern>	
+  </servlet-mapping>
 </web-app>
