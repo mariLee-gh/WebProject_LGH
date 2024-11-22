@@ -16,8 +16,8 @@ import mvcboard.MVCboardDTO;
 import utils.JSFunction;
 @WebServlet("/write.do")
 @MultipartConfig(
-		maxFileSize = 1024 * 1024 *1, //(*1은 용량)
-		maxRequestSize = 1024 * 1024 * 10
+		maxFileSize = 1024 * 1024 * 50, //(*1은 용량)
+		maxRequestSize = 1024 * 1024 * 100
 		)
 
 public class WriteController extends HttpServlet{

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML>
 <!--
 	Editorial by HTML5 UP
@@ -33,20 +34,97 @@
 										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
 									</ul>
 								</header>
-
+									
 							<!-- Content -->
 								<section>
+								<header class="main">
+										<h1>자유게시판</h1>
+									</header>
 									<header class="main">
-										<h1>제목</h1>
+				    					<table border="1">
+									    <tr>
+									        <td>Title</td>
+									        <td colspan="3">${ dto.title }</td>
+									    </tr>
+									  <tbody>
+									    <tr>
+									      <td>번호</td>
+									      <td>${ dto.board_id }</td>
+									      <td>작성자</td>
+									      <td>${ dto.username }</td>
+									    </tr>
+									    <tr>
+									      <td>작성일</td>
+									      <td>${ dto.postdate }</td>
+									      <td>조회수</td>
+									      <td>${ dto.visitcount }</td>
+									    </tr>
+									  </tbody>
+									</table>
 									</header>
 
-									<span class="image main"><img src="images/pic11.jpg" alt="" /></span>
+				<table>					<tr>
+				<th>내용</th>
+                <td colspan="3" class="content">
+                   ${ dto.content }
+                    <c:if test="${ not empty dto.ofile }">
+                    <br />
+              <c:choose>
+                 <c:when test = "${ mimeType eq 'img' }" >
+                 <!-- 이미지를 출력한다.  -->
+                    <div class="media-container">
+                    <br><img src="./Uploads/${ dto.sfile }" style="max-width:600%;"/>
+                    </div>
+                 </c:when>
+                 <c:when test = "${ mimeType eq 'audio' }" >
+                    <div class="media-container">
+                    <br><audio controls="controls">
+                       <source src="./Uploads/${ dto.sfile }" type="audio/mp3"/>
+                    </audio> 
+                    </div>
+                 </c:when>
+                 <c:when test = "${ mimeType eq 'video' }" >
+                    <div class="media-container">
+                    <br><video controls>
+                       <source src="./Uploads/${ dto.sfile }" type="video/mp4"/>
+                    </video>
+                    </div> 
+                 </c:when>
+                 <c:otherwise>
+                    <a href="./download.do?ofile=${ dto.ofile }&sfile=${ dto.sfile }&board_id=${ dto.board_id }">
+                    [다운로드]  
+                    </a>
+                 </c:otherwise>
+              </c:choose>
+           </c:if>   
+                </td>
+    </tr> 
+    
+    <!--  첨부파일  -->
+            <tr>
+                <th>첨부파일</th>
+                <td>
+                   <!-- 첨부한 파일이 있다면 다운로드 링크를 출력한다.  -->
+                 <c:if test="${ not empty dto.ofile }">
+                 ${ dto.ofile }
+                 <!-- 링크는 반드시 공백없이 한줄로 작성해야 한다. -->
+                 <a href="./download.do?ofile=${ dto.ofile }&sfile=${ dto.sfile }&board_id=${ dto.board_id }">
+                 [다운로드]  
+                 </a>
+                 </c:if>
+                </td>
+                <th>다운로드수</th>
+                <td>${ dto.downcount }</td>
+            </tr>
+    <tr>
+        <td colspan="4" align="center">
+            <button type="button" onclick="location.href='../mvcboard/edit.do?board_id=${ param.board_id }';">수정하기</button>
+            <button type="button" onclick="location.href='../mvcboard/delete.do?board_id=${ param.board_id }';">삭제하기</button>
+            <button type="button" onclick="location.href='../mvcboard/list.do';">목록 바로가기</button>
+        </td>
+    </tr>
 
-									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit.</p>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus, vel sed vehicula.</p>
-									<p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fersapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique lorem ipsum dolor.</p>
-
-									<hr class="major" />
+</table>
 
 									
 								</section>
@@ -157,3 +235,14 @@
 
 	</body>
 </html>
+
+<script>
+function deleteConfirm(board_id){
+    // 삭제 확인을 위한 confirm 창
+    let c = confirm("게시물을 삭제할까요?");
+    if(c == true){
+        // 삭제 확인 후 해당 URL로 이동
+        location.href = "../mvcboard/delete.do?board_id=" + board_id;
+    }
+}
+</script>

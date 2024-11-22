@@ -13,8 +13,8 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet("/MultipleProcess.do")
 //업로드제한용량
 @MultipartConfig(
-		maxFileSize = 1024 * 1024 *1, //(*1은 용량)
-		maxRequestSize = 1024 * 1024 * 10
+		maxFileSize = 1024 * 1024 * 50, //(*1은 용량)
+		maxRequestSize = 1024 * 1024 * 100
 		)
 
 public class MultipleProcess extends HttpServlet {
@@ -33,7 +33,7 @@ public class MultipleProcess extends HttpServlet {
 			}
 			
 			//파일 목록으로 이동한다.
-			resp.sendRedirect("FileList.jsp");
+			resp.sendRedirect("FreeList.jsp");
 			
 		}
 		

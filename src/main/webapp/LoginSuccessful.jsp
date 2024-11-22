@@ -42,6 +42,8 @@
 										<form action="logout.do" method="post">
 										    <ul class="actions">
 										        <li><button type="submit" class="button big">로그아웃</button></li>
+										         <button type="button"
+												                onclick="location.href='write.do';">글쓰기</button>
 										    </ul>
 										</form>
 										

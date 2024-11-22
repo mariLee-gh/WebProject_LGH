@@ -39,7 +39,7 @@ public class MVCboardDAO extends DBConnPool{
 		return totalCount;
 	}
 	
-	//게시판 목록에 출력할 레코드를 인출하기 위한 메서드 정의
+
 	public List<MVCboardDTO> selectList	(Map<String, Object>map) {
 		
 		List<MVCboardDTO> board = new Vector<MVCboardDTO>();
@@ -146,8 +146,7 @@ public class MVCboardDAO extends DBConnPool{
 		return board;
 				
 	}
-	//글쓰기 처리를 위한 쿼리문 실행
-	//만약 파일들을 위한 테이블이 따로있다면 조인문을 여기서 써야하는가? 
+
 	public int insertWrite(MVCboardDTO dto) {
 		int result = 0;
 		try {
@@ -175,6 +174,120 @@ public class MVCboardDAO extends DBConnPool{
 		}
 		return result;
 	}
+/*********************************************************************************/
+	//게시물 열람
+	 	public MVCboardDTO selectView(String board_id) {
+	
+	 		MVCboardDTO dto = new MVCboardDTO();
+	 		
+			String query = "SELECT Bo.*, Me.username FROM board Bo "
+					+  " INNER JOIN users Me ON Bo.user_id=Me.user_id"
+					+  " WHERE board_id=?"; 
+	 		try {
+	 			psmt = con.prepareStatement(query); 
+	 			psmt.setString(1, board_id); 
+	 			rs = psmt.executeQuery(); 
+	 			
+	 		
+	 			if (rs.next()) { 
+	 				//결과를 DTO 객체에 저장(member 테이블의 name까지 저장한다.)
+	 				dto.setBoard_id(rs.getString(1));
+	 				dto.setUser_id(rs.getString(2));
+	 				dto.setTitle(rs.getString("title"));
+	 				dto.setContent(rs.getString(4));
+	 				dto.setPostdate(rs.getDate(7));
+	 				dto.setVisitcount(rs.getInt(6));
+	 				dto.setUsername(rs.getString("username"));
+	 				//파일추가...
+	 				dto.setOfile(rs.getString("ofile"));
+	 				dto.setSfile(rs.getString("sfile"));
+	 			}
+	 		}
+	 		catch (Exception e) {
+	 			System.out.println("게시물 상세보기 중 예외 발생");
+	 			e.printStackTrace();
+	 		}
+	 		return dto; //결과 반환
+	 	}
+	 	
+
+		public void updateVisitCount(String idx) {
+		
+			String query = "UPDATE board SET "
+						 + " visitcount=visitcount+1 "
+						 + " WHERE board_id =?";
+			try {
+				psmt = con.prepareStatement(query);
+				psmt.setString(1, idx);
+				
+				//psmt.executeQuery();
+				int result = psmt.executeUpdate();
+			}
+			catch (Exception e) {
+			System.out.println("게시물 조회수 증가 중 예외 발생");
+			e.printStackTrace();	 
+			}
+		}
+		
+		
+		public void downCountPlus(String board_id) {
+			String sql = "UPDATE board SET "
+					+ " downcount=downcount+1 "
+					+ " WHERE board_id=? ";
+			
+			try {
+				psmt = con.prepareStatement(sql);
+				psmt.setString(1, board_id);
+				psmt.executeUpdate();
+			}
+			catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+		
+		public int deletePost(String board_id) {
+			int result = 0;
+			try {
+				String query = "DELETE FROM board WHERE board_id=?";
+						psmt = con.prepareStatement(query);
+						psmt.setString(1, board_id);
+						result = psmt.executeUpdate();
+			}
+			catch (Exception e) {
+				// TODO: handle exception
+				System.out.println("게시물 삭제 중 예외 발생");
+				e.printStackTrace();
+			}
+			return result;
+		}
+		
+	
+		public int updatePost(MVCboardDTO dto) {
+			int result = 0;
+			try {
+		
+				String query = "UPDATE board"
+					 + " SET title=?, content=?, ofile=?, sfile=? "
+					 + " WHERE board_id=? and user_id=?";
+				
+	
+				psmt = con.prepareStatement(query);
+				psmt.setString(1,  dto.getTitle());
+				psmt.setString(2,  dto.getContent());
+				psmt.setString(3,  dto.getOfile());
+				psmt.setString(4,  dto.getSfile());
+				psmt.setString(5,  dto.getBoard_id());
+				psmt.setString(6,  dto.getUser_id());
+		
+				result = psmt.executeUpdate();
+			}
+			catch (Exception e) {
+				// TODO: handle exception
+				System.out.println("게시물 수정 중 예외 발생");
+				e.printStackTrace();
+			}
+			return result;
+		}
 	
 	
 }

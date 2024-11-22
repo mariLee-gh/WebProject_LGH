@@ -76,7 +76,8 @@
 												</td>
 												<td align="left">
 												<!-- 제목 클릭시 '열람'페이지로 이동해야 하므로 게시물의 일련번호를 파라미터로 전달한다.  -->
-													<a href="/view.do?board_id=${row.board_id}">${row.title }</a>
+												<!--링크의 ./ 필수 -->
+													<a href="./freeview.do?board_id=${row.board_id}">${row.title }</a>
 												</td>
 												<!--현재 루프에서 row는 MVCBoardDTO를 의미하므로 각 멤버변수의 getter()를 통해 저장된값을 출력한다.  -->
 												<td>${row.user_id}</td>
@@ -125,11 +126,11 @@
 												        	</td>
 												            <td><!--현재 페이지번호 없음  --></td>
 												            <td width="100"><button type="button"
-												                onclick="/write.do;">글쓰기</button></td>
+												                onclick="location.href='write.do';">글쓰기</button></td>
 												        </tr>
 												    </table>
 
-							
+						
 
 											</div>
 											

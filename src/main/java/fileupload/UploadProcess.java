@@ -19,8 +19,8 @@ import jakarta.servlet.http.HttpServletResponse;
  * maxRequestSize: 첨부할 전체 파일의 용량을 10Mb로 지정
  * */
 @MultipartConfig(
-		maxFileSize = 1024 * 1024 *1, //(*1은 용량)
-		maxRequestSize = 1024 * 1024 * 10
+		maxFileSize = 1024 * 1024 * 50, //(*1은 용량)
+		maxRequestSize = 1024 * 1024 * 100
 		)
 public class UploadProcess extends HttpServlet{
 	
@@ -38,7 +38,7 @@ public class UploadProcess extends HttpServlet{
 			//서버에 저장된 파일명을 변경
 			String savedFileName = FileUtil.renameFile(saveDirectory, originalFileName);
 			//업로드가 완료되면 파일 목록 페이지로 이동
-			resp.sendRedirect("FileList.jsp");
+			resp.sendRedirect("FreeList.jsp");
 		}
 		
 		catch (Exception e) {
