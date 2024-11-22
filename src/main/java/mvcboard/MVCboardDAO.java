@@ -18,20 +18,18 @@ public class MVCboardDAO extends DBConnPool{
 	//게시물의 갯수를 카운트
 	public int selectCount(Map<String, Object> map) {
 		int totalCount = 0;
-		//오라클의 그룹함수는 count()를 사용해서 쿼리문 작성
+	
 		String query = "SELECT COUNT(*) FROM board ";
-		//매개변수로 전달된 검색어가 있는 경우에만 where절을 동적으로 추가
+		
 		if (map.get("searchWord") != null) {
 			query += " WHERE " + map.get("searchField") + " " + " LIKE '%" + map.get("searchWord") + "%'";
 		}
 		try {
-			//Statement 인스턴스 생성(정적쿼리문 실행)
+			
 			stmt = con.createStatement();
-			//커리문을 실행한 후 결과를 ResultSet으로 반환받는다.
 			rs = stmt.executeQuery(query);
-			/*count()함수는 조건에 상관없이 항상 결과가 인출되므로 if문과 같은 조건절없이 바로 next()함수를 실행할수있다.*/
 			rs.next();
-			//반환된 결과를 저장한다.
+
 			totalCount = rs.getInt(1);
 		}
 		catch (Exception e) {
@@ -43,33 +41,29 @@ public class MVCboardDAO extends DBConnPool{
 	
 	//게시판 목록에 출력할 레코드를 인출하기 위한 메서드 정의
 	public List<MVCboardDTO> selectList	(Map<String, Object>map) {
-		//오라클에서 인출한 레코드를 저장하기위한 List생성
+		
 		List<MVCboardDTO> board = new Vector<MVCboardDTO>();
 		
-		//레코드 인출을 위한 쿼리문 작성
 		String query = "SELECT * FROM board ";
-		//검색어 입력 여부에 따라서 where절은 조건부로 추가됨
+		
 		if (map.get("searchWord") != null) {
 			query += " WHERE " + map.get("searchField") + " LIKE '%" + map.get("searchWord") + "%' ";	
 		}
-		//일련번호의 내림차순으로 정렬한 후 인출한다.
+		
 		query += " ORDER BY board_id DESC ";
-		//게시판은 항상 최근에 작성한 게시물이 상단에 노출되어한다.
+		
 		try {
-			//prepareStatement 인스턴스 생성
+	
 			psmt = con.prepareStatement(query);
-			//쿼리문 실행 및 결과반환 (Result set)
+			
 			rs = psmt.executeQuery();
-			//ResultSet의 크기만큼 즉, 인출된 레코드가 갯수만큼 반복
+			
 			
 			while(rs.next()) {
-				//하나의 레코드를 저장하기 위해 DTO인스턴스 생성
+				
 				MVCboardDTO dto = new MVCboardDTO();
 				
-				/*
-				 * ResultSet인스턴스에서 데이터를 추출할때 멤버변수의 타입에 따라 getString(),getInt(),getDate()로 구문하여 호출한다.
-				 * 이 데이터를 DTO의 setter를 이용해서 저장한다.
-				 * */
+				
 				
 				dto.setBoard_id(rs.getString(1));
 				dto.setUser_id(rs.getString(2));
@@ -85,7 +79,7 @@ public class MVCboardDAO extends DBConnPool{
 				dto.setReply_id(rs.getString(12));
 			   
 				
-				//레코드가 저장된 DTO를 List에 갯수만큼 추가한다.
+				
 				board.add(dto);
 			}
 			
@@ -94,7 +88,7 @@ public class MVCboardDAO extends DBConnPool{
 			System.out.println("게시물 조회 중 예외 발생");
 			e.printStackTrace();
 		}
-		//마지막으로 인출한 레코드를 저장한 List를 반환한다.
+		
 		return board;	
 		
 	}
@@ -106,13 +100,13 @@ public class MVCboardDAO extends DBConnPool{
 			  + "  SELECT Tb.*, ROWNUM rNum FROM ( "
 			  + "    SELECT * FROM Board ";
 			  
-			// 검색어가 있을 경우 조건을 추가
+		
 			if (map.get("searchWord") != null) {
 			    query += " WHERE " + map.get("searchField") 
 			            + " LIKE '%" + map.get("searchWord") + "%'";
 			}
 
-			// 게시글을 작성일 기준으로 내림차순 정렬
+	
 			query += " ORDER BY postdate DESC "
 			      + "   ) Tb "
 			      + " ) "
@@ -151,6 +145,35 @@ public class MVCboardDAO extends DBConnPool{
 		}
 		return board;
 				
+	}
+	//글쓰기 처리를 위한 쿼리문 실행
+	//만약 파일들을 위한 테이블이 따로있다면 조인문을 여기서 써야하는가? 
+	public int insertWrite(MVCboardDTO dto) {
+		int result = 0;
+		try {
+
+			String query =
+					"INSERT INTO board ( "
+							+ "  user_id, title, content, ofile, sfile)"
+							+ " VALUES ( "
+							+ " ?,?,?,?,?)";
+		
+				psmt = con.prepareStatement(query);
+				//인스턴스를 통해 인파라미터 설정
+				psmt.setString(1, dto.getUser_id());
+				psmt.setString(2, dto.getTitle());
+				psmt.setString(3, dto.getContent());
+				psmt.setString(4, dto.getOfile());
+				psmt.setString(5, dto.getSfile());
+				//쿼리문 실행. insert쿼리의 경우 입력된 행의 갯수가 반환됨.
+				result = psmt.executeUpdate();
+				
+		}
+		catch (Exception e) {
+			System.out.println("게시물 입력 중 예외 발생");
+			e.printStackTrace();
+		}
+		return result;
 	}
 	
 	

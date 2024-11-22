@@ -110,5 +110,27 @@ public class MemberDAO extends DBConnPool {
 	    //그렇지 않으면 false를 반환합니다.
 	}
      
+   public int getUserIdByUserName(String username) {
+	   
+	   String query = "SELECT user_id FROM users WHERE username = ?";
+	   int userId = -1;
+	   try {
+	         psmt = con.prepareStatement(query);
+	         psmt.setString(1, username);
+	        
+	         rs = psmt.executeQuery();
+	         
+	         if(rs.next()) {
+	            userId = rs.getInt("user_id");
+	         }
+	         
+	         
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      }
+	   
+	   	
+	      return userId;
+   }
 
 }

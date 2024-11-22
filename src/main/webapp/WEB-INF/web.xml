@@ -50,4 +50,16 @@
   	<servlet-name>MVCBoardListPage</servlet-name>
   	<url-pattern>/freeList.do</url-pattern>	
   </servlet-mapping>
+  
+    <servlet>
+  	<servlet-name>MVCBoardWrite</servlet-name>
+  	<servlet-class>servlet.WriteController</servlet-class>
+  	<!-- 첨부파일에 대한 용량 설정  -->
+  	<multipart-config>
+  		<max-file-size>1048576</max-file-size>
+  		<max-request-size>10485760</max-request-size>
+  	</multipart-config>
+  </servlet>
+
+  
 </web-app>

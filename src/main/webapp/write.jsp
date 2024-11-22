@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE HTML>
 <!--
 	Editorial by HTML5 UP
@@ -7,6 +9,21 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
+
+<script type="text/javascript">
+    function validateForm(form) {  // 필수 항목 입력 확인
+        if (form.title.value == "") {
+            alert("제목을 입력하세요.");
+            form.title.focus();
+            return false;
+        }
+        if (form.content.value == "") { 
+            alert("내용을 입력하세요.");
+            form.content.focus();
+            return false;
+        }
+    }
+</script>
 	<head>
 		<title>Elements - Editorial by HTML5 UP</title>
 		<meta charset="utf-8" />
@@ -24,7 +41,7 @@
 
 							<!-- Header -->
 								<header id="header">
-									<a href="index.jsp" class="logo"><strong>Editorial</strong> by HTML5 UP</a>
+									<a href="home.jsp" class="logo"><strong>Editorial</strong> by HTML5 UP</a>
 									<ul class="icons">
 										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
 										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
@@ -44,25 +61,26 @@
 												<!-- Form -->
 													<h3>Form</h3>
 
-													<form method="post" action="#">
+													<form name="writeFrm" method="post" enctype="multipart/form-data"
+      															action="write.do" onsubmit="return validateForm(this);">
 														<div class="row gtr-uniform">
 															<div class="col-6 col-12-xsmall">
 																<input type="text" name="title" id="title" value="" placeholder="제목을 적어주세요." />
 															</div>
 															<div class="col-6 col-12-xsmall">
-																<input type="file" name="ofile" id="ofile" value="" placeholder="Email" />
+																<input type="file" name="ofile" id="ofile" value="" placeholder="file" />
 															</div>
 															<!-- Break -->
 															<div class="col-12">
-																<textarea name="demo-message" id="demo-message" placeholder="내용을 적어주세요." rows="6"></textarea>
+																<textarea name="content" id="content" placeholder="내용을 적어주세요." rows="6"></textarea>
 															</div>
 															<!-- Break -->
 															<div class="col-12">
-																<ul class="actions">
-																	<li><input type="submit" value="submit" class="primary" /></li>
-																	<li><input type="submit" value="목록으로 가기" class="primary" /></li>
-																	<li><input type="reset" value="Reset" /></li>
-																</ul>
+															<ul class="actions">
+															    <li><input type="button" value="목록 바로가기" onclick="location.href='freeList.do';" class="primary" /></li>
+															    <li><input type="submit" value="작성 완료" class="primary" /></li>
+															    <li><input type="reset" value="RESET" /></li>
+															</ul>
 															</div>
 														</div>
 													</form>
@@ -85,12 +103,7 @@
 					<div id="sidebar">
 						<div class="inner">
 
-							<!-- Search -->
-								<section id="search" class="alt">
-									<form method="post" action="#">
-										<input type="text" name="query" id="query" placeholder="Search" />
-									</form>
-								</section>
+						
 
 							<!-- Menu -->
 								<nav id="menu">

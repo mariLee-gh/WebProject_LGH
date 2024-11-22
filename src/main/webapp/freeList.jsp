@@ -56,62 +56,62 @@
 															</thead>
 															<tbody>
 																<c:choose>
-		<c:when test="${empty boardLists }">
-		<!--List에 저장된 값이 없다면 등록된 게시물이 없거나, 검색죈 게시물이 없는 경우.  -->
-			<tr>
-				<td colspan="6" align="center">
-					등록된 게시물이 없습니다 ^^*	
-				</td>
-			</tr>
-		</c:when>
-		<c:otherwise>
-		<!-- 
-		list에 저장된 데이터가 있다면, 크기만큼 반복하여 출력한다.
-		해당루프의 데이터르 인출하여 변수 row에 할당한다.
-		 -->
-			<c:forEach items="${boardLists }" var="row" varStatus="loop">
-			<tr align="center">
-				<td>
-					${ map.totalCount - (((map.pageNum-1) * map.pageSize) + loop.index)}
-				</td>
-				<td align="left">
-				<!-- 제목 클릭시 '열람'페이지로 이동해야 하므로 게시물의 일련번호를 파라미터로 전달한다.  -->
-					<a href="/view.do?board_id=${row.board_id}">${row.title }</a>
-				</td>
-				<!--현재 루프에서 row는 MVCBoardDTO를 의미하므로 각 멤버변수의 getter()를 통해 저장된값을 출력한다.  -->
-				<td>${row.user_id}</td>
-				<td>${row.postdate }</td>
-				<td>${row.visitcount }</td>
-				<td>${row.like_count }</td>
-				
-
-				</tr>
-			</c:forEach>
-		</c:otherwise>
-	</c:choose>
+										<c:when test="${empty boardLists }">
+										<!--List에 저장된 값이 없다면 등록된 게시물이 없거나, 검색죈 게시물이 없는 경우.  -->
+											<tr>
+												<td colspan="6" align="center">
+													등록된 게시물이 없습니다 ^^*	
+												</td>
+											</tr>
+										</c:when>
+										<c:otherwise>
+										<!-- 
+										list에 저장된 데이터가 있다면, 크기만큼 반복하여 출력한다.
+										해당루프의 데이터르 인출하여 변수 row에 할당한다.
+										 -->
+											<c:forEach items="${boardLists }" var="row" varStatus="loop">
+											<tr align="center">
+												<td>
+													${ map.totalCount - (((map.pageNum-1) * map.pageSize) + loop.index)}
+												</td>
+												<td align="left">
+												<!-- 제목 클릭시 '열람'페이지로 이동해야 하므로 게시물의 일련번호를 파라미터로 전달한다.  -->
+													<a href="/view.do?board_id=${row.board_id}">${row.title }</a>
+												</td>
+												<!--현재 루프에서 row는 MVCBoardDTO를 의미하므로 각 멤버변수의 getter()를 통해 저장된값을 출력한다.  -->
+												<td>${row.user_id}</td>
+												<td>${row.postdate }</td>
+												<td>${row.visitcount }</td>
+												<td>${row.like_count }</td>
+												
+								
+												</tr>
+											</c:forEach>
+										</c:otherwise>
+									</c:choose>
 															</tbody>
 														
 														</table>
 														<form method="get">
-<table border="1" width="90%" style="border-collapse: collapse;">
-    <tr>
-        <td align="center" style="padding: 10px; white-space: nowrap;">
-            <!-- 검색 기준 선택 -->
-            <select name="searchField" style="width: 150px; display: inline-block;">
-                <option value="title">제목</option>
-                <option value="content">내용</option>
-                <option value="user_id">작성자</option>
-            </select>
-            
-            <!-- 검색어 입력 -->
-            <input type="text" name="searchWord" id="search" placeholder="Search" style="width: 350px; display: inline-block; " />
-            
-            <!-- 검색 버튼 -->
-            <input type="submit" value="검색하기" style="width: 100px; display: inline-block;" />
-        </td>
-    </tr>
-</table>
-</form>
+															<table border="1" width="90%" style="border-collapse: collapse;">
+															    <tr>
+															        <td align="center" style="padding: 10px; white-space: nowrap;">
+															            <!-- 검색 기준 선택 -->
+															            <select name="searchField" style="width: 150px; display: inline-block;">
+															                <option value="title">제목</option>
+															                <option value="content">내용</option>
+															                <option value="user_id">작성자</option>
+															            </select>
+															            
+															            <!-- 검색어 입력 -->
+															            <input type="text" name="searchWord" id="search" placeholder="Search" style="width: 350px; display: inline-block; " />
+															            
+															            <!-- 검색 버튼 -->
+															            <input type="submit" value="검색하기" style="width: 100px; display: inline-block;" />
+															        </td>
+															    </tr>
+															</table>
+															</form>
 														
 											
 													</div>

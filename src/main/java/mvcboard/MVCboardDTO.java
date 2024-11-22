@@ -15,6 +15,10 @@ public class MVCboardDTO {
     private int is_secret;    // 비밀글 여부 (0: 공개, 1: 비밀글)
     private String category;
     private String reply_id;
+    private String ofile;
+    private String sfile;
+    private String username;
+    
 	public String getBoard_id() {
 		return board_id;
 	}
@@ -87,6 +91,25 @@ public class MVCboardDTO {
 	public void setReply_id(String reply_id) {
 		this.reply_id = reply_id;
 	}
+	public String getOfile() {
+		return ofile;
+	}
+	public void setOfile(String ofile) {
+		this.ofile = ofile;
+	}
+	public String getSfile() {
+		return sfile;
+	}
+	public void setSfile(String sfile) {
+		this.sfile = sfile;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
     
     
     
