@@ -118,9 +118,14 @@
             </tr>
     <tr>
         <td colspan="4" align="center">
-            <button type="button" onclick="location.href='../mvcboard/edit.do?board_id=${ param.board_id }';">수정하기</button>
-            <button type="button" onclick="location.href='../mvcboard/delete.do?board_id=${ param.board_id }';">삭제하기</button>
-            <button type="button" onclick="location.href='../mvcboard/list.do';">목록 바로가기</button>
+        
+        <!-- 사용자 ID와 게시물 ID 비교하여 수정/삭제 버튼 보여주기 -->
+        <c:if test="${username eq dto.username}">
+            <button type="button" onclick="location.href='./freeEdit.do?idx=${param.board_id}';">수정하기</button>
+            <button type="button" onclick="deleteConfirm('${param.board_id}');">삭제하기</button>
+        </c:if>
+
+            <button type="button" onclick="location.href='./freeList.do';">목록 바로가기</button>
         </td>
     </tr>
 
@@ -242,7 +247,7 @@ function deleteConfirm(board_id){
     let c = confirm("게시물을 삭제할까요?");
     if(c == true){
         // 삭제 확인 후 해당 URL로 이동
-        location.href = "../mvcboard/delete.do?board_id=" + board_id;
+        location.href = "./delete.do?board_id=" + board_id;
     }
 }
 </script>

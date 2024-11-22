@@ -24,6 +24,7 @@ public class FreeViewCtrl extends HttpServlet {
       dao.updateVisitCount(board_id);
       //일련번호에 해당하는 게시물 인증
       MVCboardDTO dto = dao.selectView(board_id);
+      
       dao.close();
       
       //줄바꿈 처리 : 웹브라우저에서 출력할 때는 <br>태그로 변경해야 한다. 
