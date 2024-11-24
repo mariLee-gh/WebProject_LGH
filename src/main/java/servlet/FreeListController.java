@@ -31,6 +31,7 @@ public class FreeListController extends HttpServlet {
 			map.put("searchField", searchField);
 			map.put("searchWord", searchWord);
 		}
+		//map.put("category", "자유게시판");
 		//게시물의 갯수 카운트 , 검색어가 있는 경우 like 절 동작 추가됨
 		int totalCount = dao.selectCount(map);
 		

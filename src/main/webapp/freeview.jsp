@@ -121,7 +121,7 @@
         
         <!-- 사용자 ID와 게시물 ID 비교하여 수정/삭제 버튼 보여주기 -->
         <c:if test="${username eq dto.username}">
-            <button type="button" onclick="location.href='./freeEdit.do?idx=${param.board_id}';">수정하기</button>
+            <button type="button" onclick="location.href='freeEdit.do?board_id=${param.board_id}';">수정하기</button>
             <button type="button" onclick="deleteConfirm('${param.board_id}');">삭제하기</button>
         </c:if>
 

@@ -51,15 +51,6 @@
 										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
 									</ul>
 									
-									<form name="writeFrm" method="post" enctype="multipart/form-data" action="../mvcboard/edit.do" onsubmit="return validateForm(this);">
-									<!--수정할 게시물의 일련번호  -->
-									<input type="hid-den" name="board_id" value="${ dto.board_id }"/>
-									<!-- 게시물의 작성자 아이디 -->
-									<input type="hid-den" name="username" value="${ dto.username }"/>
-									<!-- 기존 게시물의 파일명  -->
-									<input type="hid-den" name="prevOfile" value="${ dto.ofile }" />
-									<!--  -->
-									<input type="hid-den" name="prevSfile" value="${ dto.sfile }" />
 								</header>
 
 							<!-- Content -->
@@ -68,22 +59,33 @@
 										<h2 id="elements">Elements</h2>
 										<div class="row gtr-200">
 											<div class="col-6 col-12-medium">
+											
+											
+									<form name="writeFrm" method="post" enctype="multipart/form-data" action="freeEdit.do" onsubmit="return validateForm(this);">
+									<!--수정할 게시물의 일련번호  -->
+									<input type="hidden"  name="board_id" value="${ dto.board_id }"/>
+									<!-- 게시물의 작성자 아이디 -->
+									<input type="hidden" name="username" value="${ dto.username }"/>
+									<!-- 기존 게시물의 파일명  -->
+									<input type="hidden" name="prevOfile" value="${ dto.ofile }" />
+									<!--  -->
+									<input type="hidden" name="prevSfile" value="${ dto.sfile }" />
 
 												<!-- Form -->
 													<h3>Form</h3>
 
-													<form name="writeFrm" method="post" enctype="multipart/form-data"
-      															action="write.do" onsubmit="return validateForm(this);">
+													<form name="writeFrm" method="post" enctype="multipart/form-data" action="write.do" onsubmit="return validateForm(this);">
 														<div class="row gtr-uniform">
 															<div class="col-6 col-12-xsmall">
-																<input type="text" name="title" id="title" value=""${ dto.title }"" placeholder="제목을 적어주세요." />
+																<input type="text" name="title" style="width:90%;" value="${ dto.title }" />
 															</div>
 															<div class="col-6 col-12-xsmall">
-																<input type="file" name="ofile" id="ofile" value="" placeholder="file" />
+																<input type="file" name="ofile"  />
 															</div>
 															<!-- Break -->
 															<div class="col-12">
-																<textarea name="content" id="content" placeholder="내용을 적어주세요." rows="6">${ dto.content }</textarea>
+																  <textarea name="content" style="width:90%;height:100px;">${ dto.content }</textarea>
+        </td>
 															</div>
 															<!-- Break -->
 															<div class="col-12">

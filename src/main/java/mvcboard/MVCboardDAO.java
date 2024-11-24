@@ -207,6 +207,7 @@ public class MVCboardDAO extends DBConnPool{
 	 			System.out.println("게시물 상세보기 중 예외 발생");
 	 			e.printStackTrace();
 	 		}
+	 		System.out.println("dao>"+dto.getUsername());
 	 		return dto; //결과 반환
 	 	}
 	 	

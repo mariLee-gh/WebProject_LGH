@@ -35,9 +35,11 @@ public class EditController extends HttpServlet {
       }
       
       //게시물 얻어오기 : '열람'에서 사용했던 메서드를 그대로 호출
-      String board = req.getParameter("board_id");
+      String board_id = req.getParameter("board_id");
       MVCboardDAO dao = new MVCboardDAO();
-      MVCboardDTO dto = dao.selectView(board);
+      MVCboardDTO dto = dao.selectView(board_id);
+
+      System.out.println("controller"+dto.getUsername());
       
       //작성자 본인 확인 : DTO에 저장된 id와 로그인 아이디를 비교
       if(!dto.getUsername().equals(session.getAttribute("username").toString())) {
