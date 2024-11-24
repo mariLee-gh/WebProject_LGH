@@ -64,6 +64,7 @@
 													<form name="writeFrm" method="post" enctype="multipart/form-data"
       															action="write.do" onsubmit="return validateForm(this);">
 														<div class="row gtr-uniform">
+    														<input type="hidden" name="category" value="<%= request.getParameter("category") %>">
 															<div class="col-6 col-12-xsmall">
 																<input type="text" name="title" id="title" value="" placeholder="제목을 적어주세요." />
 															</div>

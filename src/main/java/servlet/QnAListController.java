@@ -7,6 +7,7 @@ import java.util.Map;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,8 +15,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import mvcboard.MVCboardDAO;
 import mvcboard.MVCboardDTO;
 import utils.BoardPage;
-
-public class FreeListController extends HttpServlet {
+@WebServlet("/QnAList.do")
+public class QnAListController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -31,7 +32,7 @@ public class FreeListController extends HttpServlet {
 			map.put("searchField", searchField);
 			map.put("searchWord", searchWord);
 		}
-		map.put("category", "free");
+		map.put("category", "QnA");
 		//게시물의 갯수 카운트 , 검색어가 있는 경우 like 절 동작 추가됨
 		int totalCount = dao.selectCount(map);
 		
@@ -67,7 +68,7 @@ public class FreeListController extends HttpServlet {
 		
 		//뷰에 전달할 매게 변수 추가
 		//목록 하단에 출력할 페이지 바로가기 링크를 얻어온 후 Map에 추가
-		String pagingImg = BoardPage.pagingStr(totalCount, pageSize, blockPage, pageNum, "freeList.do");
+		String pagingImg = BoardPage.pagingStr(totalCount, pageSize, blockPage, pageNum, "QnAList.do");
 		map.put("pagingImg", pagingImg);
 		map.put("totalCount", totalCount);
 		map.put("pageSize", pageSize);
@@ -75,7 +76,7 @@ public class FreeListController extends HttpServlet {
 		//전달할 데이터를 request 영역에 저장 후 View로 포워드
 		req.setAttribute("boardLists", boardLists);
 		req.setAttribute("map", map);
-		req.getRequestDispatcher("freeList.jsp").forward(req, resp);
+		req.getRequestDispatcher("QnAList.jsp").forward(req, resp);
 	}
 		
 	

@@ -39,7 +39,7 @@
 						<section>
 				
 												<!-- Table -->
-													<h3>자유게시판</h3>
+													<h3>자료게시판</h3>
 																			
 													<div class="table-wrapper">
 														<table>
@@ -126,8 +126,14 @@
 												        	</td>
 												            <td><!--현재 페이지번호 없음  --></td>
 												            <td width="100">
+												           <c:if test="${map.user_type eq 'admin' or map.user_type eq 'lecturer'}">
+											                <form method="get" action="write.do">
+											                    <input type="hidden" name="category" value="Resource" />
+											                    <input type="submit" value="글쓰기" />
+											                </form>
+											            </c:if>
 												            <form method="get" action='write.do'  >
-												            	<input type='text' name = 'category' value="free" style="display:none"/>
+												            	<input type='text' name = 'category' value="Resource" style="display:none"/>
 												            	<input type='submit' value="글쓰기"/>
 												            </form>
 

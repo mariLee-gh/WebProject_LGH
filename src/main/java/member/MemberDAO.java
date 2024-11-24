@@ -133,6 +133,28 @@ public class MemberDAO extends DBConnPool {
 	      return userId;
    }
    
+   public String getUserType(String username) {
+	   String query = "SELECT user_type FROM users WHERE username = ?";
+	   String user_type = "";
+	   try {
+		   
+		   psmt = con.prepareStatement(query);
+	       psmt.setString(1, username);
+	       
+	       rs = psmt.executeQuery();
+	         
+	       if(rs.next()) {
+	    	   user_type = rs.getString("user_type");
+	       }
+	         
+		
+	} catch (Exception e) {
+		 e.printStackTrace();
+	}
+	
+	 return user_type;
+}
+   
    
    
 

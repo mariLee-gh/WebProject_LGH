@@ -39,7 +39,7 @@
 						<section>
 				
 												<!-- Table -->
-													<h3>자유게시판</h3>
+													<h3>질문게시판</h3>
 																			
 													<div class="table-wrapper">
 														<table>
@@ -50,7 +50,7 @@
 																	<th>작성자</th>
 																	<th>작성일</th>
 																	<th>조회수</th>
-																	<th>좋아요</th>
+																	
 																	
 																</tr>
 															</thead>
@@ -83,7 +83,7 @@
 												<td>${row.user_id}</td>
 												<td>${row.postdate }</td>
 												<td>${row.visitcount }</td>
-												<td>${row.like_count }</td>
+												
 												
 								
 												</tr>
@@ -127,7 +127,7 @@
 												            <td><!--현재 페이지번호 없음  --></td>
 												            <td width="100">
 												            <form method="get" action='write.do'  >
-												            	<input type='text' name = 'category' value="free" style="display:none"/>
+												            	<input type='text' name = 'category' value="QnA" style="display:none"/>
 												            	<input type='submit' value="글쓰기"/>
 												            </form>
 

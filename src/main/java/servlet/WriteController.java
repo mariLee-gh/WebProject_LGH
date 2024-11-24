@@ -32,7 +32,7 @@ public class WriteController extends HttpServlet{
 			// Java코드가 더이상 실행되지 않도록 차단
 			return;
 		}
-		// 로그인이 완료된 상태라면 쓰기페이지를 포워드 한다.
+		
 		req.getRequestDispatcher("write.jsp").forward(req, resp);
 	}
 	
@@ -44,7 +44,10 @@ public class WriteController extends HttpServlet{
 			JSFunction.alertLocation(resp, "로그인 후 이용해주세요.", "LoginForm.jsp");
 			return;
 		}
-
+		
+		
+		// 로그인이 완료된 상태라면 쓰기페이지를 포워드 한다.
+	
 		// 1. 파일 업로드 처리
 		// 업로드 디텔터리의 물리적 경로 확인
 		String saveDirectory = req.getServletContext().getRealPath("/Uploads");
@@ -77,12 +80,16 @@ public class WriteController extends HttpServlet{
 			e.printStackTrace();
 			return;
 		}
-      
+		
+		
+		String category = req.getParameter("category");
+
 		
 		// 제목과 내용들은 사용자가 전송한 폼값을 받은 후 저장한다
 		dto.setUser_id(String.valueOf(userId));
 		dto.setTitle(req.getParameter("title"));
 		dto.setContent(req.getParameter("content"));
+		dto.setCategory(category);
 
 		// 원본 파일명과 저장된 파일이름 설정
 		if (originalFileName != "") {
@@ -108,7 +115,8 @@ public class WriteController extends HttpServlet{
 		// 성공 or 실행?
 		if (result == 1) { // 글쓰기 성공
 			// 게시판 목록으로 이동
-			resp.sendRedirect("freeList.do");
+			String redirectPage = category + "List.do"; //freeList.do QnAList.do
+			resp.sendRedirect(redirectPage);
 		} else {// 글쓰기실패
 				// 글쓰기 페이지로 다시 돌아간다.
 			JSFunction.alertLocation(resp, "글쓰기에 실패했습니다.", "write.do");

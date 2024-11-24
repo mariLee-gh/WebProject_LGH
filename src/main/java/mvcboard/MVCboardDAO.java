@@ -19,10 +19,10 @@ public class MVCboardDAO extends DBConnPool{
 	public int selectCount(Map<String, Object> map) {
 		int totalCount = 0;
 	
-		String query = "SELECT COUNT(*) FROM board ";
+		String query = "SELECT COUNT(*) FROM board WHERE category = '"+ map.get("category")+ "'";	
 		
 		if (map.get("searchWord") != null) {
-			query += " WHERE " + map.get("searchField") + " " + " LIKE '%" + map.get("searchWord") + "%'";
+			query += " AND " + map.get("searchField") + " " + " LIKE '%" + map.get("searchWord") + "%'";
 		}
 		try {
 			
@@ -44,10 +44,9 @@ public class MVCboardDAO extends DBConnPool{
 		
 		List<MVCboardDTO> board = new Vector<MVCboardDTO>();
 		
-		String query = "SELECT * FROM board ";
-		
+		String query = "SELECT * FROM board WHERE category = '"+ map.get("category")+ "'";		
 		if (map.get("searchWord") != null) {
-			query += " WHERE " + map.get("searchField") + " LIKE '%" + map.get("searchWord") + "%' ";	
+			query += " AND " + map.get("searchField") + " LIKE '%" + map.get("searchWord") + "%' ";	
 		}
 		
 		query += " ORDER BY board_id DESC ";
@@ -98,11 +97,11 @@ public class MVCboardDAO extends DBConnPool{
 		String query = 
 			    " SELECT * FROM ( "
 			  + "  SELECT Tb.*, ROWNUM rNum FROM ( "
-			  + "    SELECT * FROM Board ";
+			  + "    SELECT * FROM Board WHERE category = '"+ map.get("category")+ "'";		
 			  
 		
 			if (map.get("searchWord") != null) {
-			    query += " WHERE " + map.get("searchField") 
+			    query += " AND " + map.get("searchField") 
 			            + " LIKE '%" + map.get("searchWord") + "%'";
 			}
 
@@ -153,9 +152,9 @@ public class MVCboardDAO extends DBConnPool{
 
 			String query =
 					"INSERT INTO board ( "
-							+ "  user_id, title, content, ofile, sfile)"
+							+ "  user_id, title, content, ofile, sfile,category)"
 							+ " VALUES ( "
-							+ " ?,?,?,?,?)";
+							+ " ?,?,?,?,?,?)";
 		
 				psmt = con.prepareStatement(query);
 				//인스턴스를 통해 인파라미터 설정
@@ -164,6 +163,7 @@ public class MVCboardDAO extends DBConnPool{
 				psmt.setString(3, dto.getContent());
 				psmt.setString(4, dto.getOfile());
 				psmt.setString(5, dto.getSfile());
+				psmt.setString(6, dto.getCategory());
 				//쿼리문 실행. insert쿼리의 경우 입력된 행의 갯수가 반환됨.
 				result = psmt.executeUpdate();
 				
